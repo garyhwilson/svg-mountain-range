@@ -1,8 +1,14 @@
+/**
+ * @class Render
+ */
+
 export default class {
 
   /**
    * Create SVG of mountain peaks.
    *
+   * @function constructor
+   * @memberOf Render
    * @param {array} coords
    * @param {Object} stage
    * @param {Object} valleys
@@ -40,16 +46,15 @@ export default class {
   /**
    * Returns gradient definition.
    *
+   * @memberOf Render
    * @param {Object} svg
    * @param {string} id
    * @param {Object} gradient
    * @returns {Object}
-   * @todo Remove SVG parameters as a dependency.
-   * @todo Remove querySelector as a dependency.
    */
-  createGradient(svg, id, gradient) {
+  createGradient(svgNS, id, gradient) {
     const stops = gradient.stops;
-    const svgNS = svg.namespaceURI;
+    //const svgNS = svg.namespaceURI;
     const grad = document.createElementNS(svgNS, 'linearGradient');
 
     grad.setAttribute('id', id);
@@ -67,13 +72,13 @@ export default class {
       grad.appendChild(stop);
     }
 
-    const defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS(svgNS, 'defs'), svg.firstChild);
-    return defs.appendChild(grad);
+    return grad;
   }
 
   /**
    * Return SVG polygon element of mountain peaks.
    *
+   * @memberOf Render
    * @param {Object} svg -
    * @param {array} coords -
    * @param {number} width -
@@ -81,7 +86,6 @@ export default class {
    * @param {string} [color] -
    * @param {Object} [gradient] -
    * @returns {Object} SVG polygon element of mountain peaks.
-   * @todo Remove SVG parameters as a dependency.
    */
   createMountainPoly(svg, coords, width, height, color = '#000000', gradient) {
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
@@ -90,7 +94,10 @@ export default class {
     poly.setAttribute('points', `${points} ${width},${height} 0,${height}`);
 
     if (gradient) {
-      this.createGradient(svg, 'mountainGradient', gradient);
+      const grad = this.createGradient(svg.namespaceURI, 'mountainGradient', gradient);
+      const defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS(svg.namespaceURI, 'defs'), svg.firstChild);
+
+      defs.appendChild(grad);
       poly.setAttribute('fill', 'url(#mountainGradient)');
     } else {
       poly.setAttribute('fill', color);
@@ -102,6 +109,7 @@ export default class {
   /**
    * Add a stroke to the mountain peak ridgeline.
    *
+   * @memberOf Render
    * @param {array} coords -
    * @param {string} [color] -
    * @param {number} [thickness] -
@@ -128,6 +136,7 @@ export default class {
   /**
    * Return filled path with shadows of mountain peaks.
    *
+   * @memberOf Render
    * @param {Object} svg
    * @param {number} height
    * @param {array} coords
@@ -135,7 +144,6 @@ export default class {
    * @param {string} [color]
    * @param {Object} [gradient]
    * @returns {Object}
-   * @todo Remove SVG parameters as a dependency.
    */
   createShadowPath(svg, height, coords, valleyMinY, color = '#000000', gradient) {
     const pointCount = coords.length;
@@ -180,7 +188,10 @@ export default class {
     }
 
     if (gradient) {
-      this.createGradient(svg, 'shadowGradient', gradient);
+      const grad = this.createGradient(svg.namespaceURI, 'shadowGradient', gradient);
+      const defs = svg.querySelector('defs') || svg.insertBefore(document.createElementNS(svg.namespaceURI, 'defs'), svg.firstChild);
+
+      defs.appendChild(grad);
       path.setAttribute('fill', 'url(#shadowGradient)');
     } else {
       path.setAttribute('fill', color);

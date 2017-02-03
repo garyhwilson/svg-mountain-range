@@ -2,12 +2,24 @@ import Utils from './modules/Utils';
 import Coords from './modules/Coords';
 import Render from './modules/Render';
 
+/**
+ * Blah blah blah
+ * 
+ * @export
+ * @class SVGMountainRange
+ */
 export default class SVGMountainRange {
 
-  constructor(obj) {
+  /**
+   * Create blah blah blah
+   * 
+   * @param {Object} [config={ }] - Configuration settings for every apsect of generating the SVG mountain range.
+   * @returns {Object} Returns the results of the merge between the target and source objects.
+   * 
+   * @memberOf SVGMountainRange
+   */
+  create(config = { }) {
     const utils = new Utils();
-
-    const config = obj || { };
     const defaultConfig = {
       stage: {
         width: 600,
@@ -24,8 +36,6 @@ export default class SVGMountainRange {
       }
     };
 
-    this._config = utils.mergeDeep(defaultConfig, config);
-
     const {
       initPeaks,
       stage,
@@ -35,7 +45,7 @@ export default class SVGMountainRange {
       ridge,
       valleys,
       flats
-    } = this._config;
+    } = utils.mergeDeep(defaultConfig, config);
 
     const coords = new Coords(stage, initPeaks, peaks, valleys, flats);
     const svg = new Render(coords, stage, valleys, fill, shadow, ridge);
