@@ -1,0 +1,41 @@
+{
+  "name": "svg-mountain-range",
+  "version": "1.0.0",
+  "description": "An SVG generator for creating a 2D mountain range.",
+  "keywords": [
+    "javascript",
+    "library",
+    "svg",
+    "mountain"
+  ],
+  "author": "Gary H. Wilson <jslibs@garyhwilson.com> (http://garyhwilson.com)",
+  "homepage": "https://github.com/garyhwilson/svg-mountain-range",
+  "license": "MIT",
+  "main": "lib/svg-mountain-range.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/garyhwilson/svg-mountain-range.git"
+  },
+  "bugs": {
+    "url": "https://github.com/garyhwilson/svg-mountain-range/issues"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^2.0.1",
+    "jsdoc": "^3.4.3",
+    "minami": "^1.1.1",
+    "rollup-stream": "^1.19.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "scripts": {
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+  }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Mountain Range</title>
+</head>
+<body>
+  <script src="../lib/svg-mountain-range.min.js"></script>
+  <script>
+    var config = {
+      stage: {
+        height: 400,
+        width: 1600
+      },
+      peaks: {
+        count: 2,
+        detail: 4,
+        maxY: 350,
+        minY: 250
+      },
+      valleys: {
+        minY: 50
+      },
+      flats: [
+        {
+          name: 'platform1',
+          width: 70,
+          pos: 0.075
+        },
+        {
+          name: 'platform2',
+          width: 70,
+          pos: 0.43,
+          align: 'right'
+        }
+      ],
+      fill: {
+        color: '#ccc',
+        gradient: {
+          x1: '0%',
+          y1: '50%',
+          x2: '0%',
+          y2: '100%',
+          stops: [
+            {
+              offset: '0%',
+              'stop-color': '#fff'
+            },
+            {
+              offset: '33%',
+              'stop-color': '#aaa'
+            },
+            {
+              offset: '100%',
+              'stop-color': '#706666'
+            }
+          ]
+        }
+      },
+      shadow: {
+        color: '#555',
+        gradient: {
+          x1: '0%',
+          y1: '50%',
+          x2: '0%',
+          y2: '100%',
+          stops: [
+            {
+              offset: '0%',
+              'stop-color': '#555'
+            },
+            {
+              offset: '66%',
+              'stop-color': '#000'
+            }
+          ]
+        }
+      },
+      ridge: {
+        color: '#000',
+        thickness: 5
+      }
+    };
+
+    var svg = new SVGMountainRange(config);
+    document.body.appendChild(svg);
+  </script>
+</body>
+</html>
