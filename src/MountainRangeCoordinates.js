@@ -1,5 +1,5 @@
 /**
- * @class Coords
+ * @class MountainRangeCoordinates
  */
 
 export default class {
@@ -8,7 +8,7 @@ export default class {
    * Returns x/y coordinate objects in an array with procedurally generate points.
    *
    * @function constructor
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {Object} stage - The stage configuration object.
    * @param {array} [initPeaks] - The initial defined peaks, instead of random.
    * @param {Object} peaks - The peaks configuration object.
@@ -42,7 +42,7 @@ export default class {
   /**
    * Returns a randomly generated y-axis point for a tall peak.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {number} peakMinY - The minimum y-axis limit for the new point.
    * @param {number} peakMaxY - The maximum y-axis limit for the new point.
    * @returns {number} Randomly generated y-axis point for a tall peak.
@@ -54,7 +54,7 @@ export default class {
   /**
    * Returns a randomly generated low valley y-axis value.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {number} peakMinY - The minimum y-axis limit for a peak point.
    * @param {number} valleyMinY - The minimum y-axis limit for a valley point.
    * @returns {number} Randomly generated low valley y-axis value.
@@ -66,7 +66,7 @@ export default class {
   /**
    * Returns an array of y-axis points.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {number} count - The count of tallest mountain peaks.
    * @param {number} valleyMinY - The lowest y-axis point.
    * @param {number} peakMinY - The lowest y-axis point for the tallest peaks.
@@ -111,7 +111,7 @@ export default class {
   /**
    * Return random y-axis position based on two points.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {number} point1 - First point to subdivide.
    * @param {number} point2 - Second point to subdivide.
    * @param {number} passes - The number of times to subdivide the points.
@@ -144,7 +144,7 @@ export default class {
   /**
    * Return array of random subdivided y-axis points.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {array} points - An array of y-axis points.
    * @param {number} passes - The number of times to subdivide the points.
    * @param {number} minY - The minimum y-axis limit for the new point.
@@ -166,7 +166,7 @@ export default class {
   /**
    * Return an array of X and Y coordinate objects.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {Object} stage - The stage configuration object.
    * @param {array} points - An array of y-axis points.
    * @returns Array of X and Y coordinate objects.
@@ -189,7 +189,7 @@ export default class {
   /**
    * Returns a coordinates array with leveled y-axis values for a specific width at given positions.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {array} coords - The coordinates array.
    * @param {number} pos - The x-axis position to start leveling.
    * @param {number} width - The width of the area to be leveled.
@@ -233,7 +233,7 @@ export default class {
   /**
    * Returns the coordinates array with flattened areas.
    *
-   * @memberOf Coords
+   * @memberOf MountainRangeCoordinates
    * @param {array} coords - The coordinates array.
    * @param {array} flats - The flats configuration array.
    * @returns {array} The coordinates array with flattened areas.

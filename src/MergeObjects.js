@@ -1,5 +1,5 @@
 /**
- * @class Utils
+ * @class MergeObjects
  */
 
 
@@ -7,7 +7,7 @@ export default class {
   /**
    * Utility method for determing if variable is an object.
    *
-   * @memberOf Utils
+   * @memberOf MergeObjects
    * @param {Object} val - The value to be tested if an object or not.
    * @returns {boolean} Returns TRUE if the parameter is an object, otherwise FALSE.
    */
@@ -18,7 +18,7 @@ export default class {
   /**
    * Perform a deep merge from source onto target.
    *
-   * @memberOf Utils
+   * @memberOf MergeObjects
    * @param {Object} target
    * @param {Object} source
    * @returns {Object} Returns the results of the merge between the target and source objects.

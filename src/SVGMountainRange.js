@@ -1,12 +1,14 @@
-import Utils from './modules/Utils';
-import Coords from './modules/Coords';
-import Render from './modules/Render';
+import MergeObjects from './MergeObjects';
+import MountainRangeCoordinates from './MountainRangeCoordinates';
+import RenderMountainRange from './RenderMountainRange';
 
 /**
  * Blah blah blah
  * 
- * @export
  * @class SVGMountainRange
+ * @requires MergeObjects
+ * @requires MountainRangeCoordinates
+ * @requires RenderMountainRange
  */
 export default class SVGMountainRange {
 
@@ -19,7 +21,7 @@ export default class SVGMountainRange {
    * @memberOf SVGMountainRange
    */
   create(config = { }) {
-    const utils = new Utils();
+    const merge = new MergeObjects();
     const defaultConfig = {
       stage: {
         width: 600,
@@ -45,10 +47,10 @@ export default class SVGMountainRange {
       ridge,
       valleys,
       flats
-    } = utils.mergeDeep(defaultConfig, config);
+    } = merge.mergeDeep(defaultConfig, config);
 
-    const coords = new Coords(stage, initPeaks, peaks, valleys, flats);
-    const svg = new Render(coords, stage, valleys, fill, shadow, ridge);
+    const coords = new MountainRangeCoordinates(stage, initPeaks, peaks, valleys, flats);
+    const svg = new RenderMountainRange(coords, stage, valleys, fill, shadow, ridge);
 
     return svg;
   }

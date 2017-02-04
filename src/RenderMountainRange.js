@@ -1,5 +1,7 @@
 /**
- * @class Render
+ * yadda
+ *
+ * @class RenderMountainRange
  */
 
 export default class {
@@ -8,7 +10,6 @@ export default class {
    * Create SVG of mountain peaks.
    *
    * @function constructor
-   * @memberOf Render
    * @param {array} coords
    * @param {Object} stage
    * @param {Object} valleys
@@ -16,6 +17,8 @@ export default class {
    * @param {Object} shadow
    * @param {Object} ridge
    * @returns {Object}
+   *
+   * @memberOf RenderMountainRange
    */
   constructor(coords, stage, valleys, fill, shadow, ridge) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -46,7 +49,7 @@ export default class {
   /**
    * Returns gradient definition.
    *
-   * @memberOf Render
+   * @memberOf RenderMountainRange
    * @param {Object} svg
    * @param {string} id
    * @param {Object} gradient
@@ -78,7 +81,7 @@ export default class {
   /**
    * Return SVG polygon element of mountain peaks.
    *
-   * @memberOf Render
+   * @memberOf RenderMountainRange
    * @param {Object} svg -
    * @param {array} coords -
    * @param {number} width -
@@ -109,7 +112,7 @@ export default class {
   /**
    * Add a stroke to the mountain peak ridgeline.
    *
-   * @memberOf Render
+   * @memberOf RenderMountainRange
    * @param {array} coords -
    * @param {string} [color] -
    * @param {number} [thickness] -
@@ -136,7 +139,7 @@ export default class {
   /**
    * Return filled path with shadows of mountain peaks.
    *
-   * @memberOf Render
+   * @memberOf RenderMountainRange
    * @param {Object} svg
    * @param {number} height
    * @param {array} coords
