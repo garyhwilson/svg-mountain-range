@@ -1,7 +1,7 @@
 {
   "name": "svg-mountain-range",
   "version": "1.0.0",
-  "description": "An SVG generator for creating a 2D mountain range.",
+  "description": "A configurable SVG generator for creating a 2D mountain range.",
   "keywords": [
     "javascript",
     "library",
