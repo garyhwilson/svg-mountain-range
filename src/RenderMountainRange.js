@@ -57,7 +57,6 @@ export default class {
    */
   createGradient(svgNS, id, gradient) {
     const stops = gradient.stops;
-    //const svgNS = svg.namespaceURI;
     const grad = document.createElementNS(svgNS, 'linearGradient');
 
     grad.setAttribute('id', id);

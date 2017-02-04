@@ -3,7 +3,7 @@
  */
 
 export default class {
-  
+
  /**
    * Returns x/y coordinate objects in an array with procedurally generate points.
    *

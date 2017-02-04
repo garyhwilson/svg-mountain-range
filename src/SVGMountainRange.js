@@ -4,7 +4,7 @@ import RenderMountainRange from './RenderMountainRange';
 
 /**
  * Blah blah blah
- * 
+ *
  * @class SVGMountainRange
  * @requires MergeObjects
  * @requires MountainRangeCoordinates
@@ -14,10 +14,10 @@ export default class SVGMountainRange {
 
   /**
    * Create blah blah blah
-   * 
+   *
    * @param {Object} [config={ }] - Configuration settings for every apsect of generating the SVG mountain range.
    * @returns {Object} Returns the results of the merge between the target and source objects.
-   * 
+   *
    * @memberOf SVGMountainRange
    */
   create(config = { }) {
