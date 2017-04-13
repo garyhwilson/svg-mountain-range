@@ -1,7 +1,12 @@
 /**
+ * @module RenderMountainRange
+ */
+
+/**
  * yadda
  *
  * @class RenderMountainRange
+ * @memberof module:RenderMountainRange
  */
 
 export default class {
@@ -17,8 +22,7 @@ export default class {
    * @param {Object} shadow
    * @param {Object} ridge
    * @returns {Object}
-   *
-   * @memberOf RenderMountainRange
+   * @memberof module:RenderMountainRange
    */
   constructor(coords, stage, valleys, fill, shadow, ridge) {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -49,11 +53,11 @@ export default class {
   /**
    * Returns gradient definition.
    *
-   * @memberOf RenderMountainRange
    * @param {Object} svg
    * @param {string} id
    * @param {Object} gradient
    * @returns {Object}
+   * @memberof module:RenderMountainRange
    */
   createGradient(svgNS, id, gradient) {
     const stops = gradient.stops;
@@ -80,7 +84,6 @@ export default class {
   /**
    * Return SVG polygon element of mountain peaks.
    *
-   * @memberOf RenderMountainRange
    * @param {Object} svg -
    * @param {array} coords -
    * @param {number} width -
@@ -88,6 +91,7 @@ export default class {
    * @param {string} [color] -
    * @param {Object} [gradient] -
    * @returns {Object} SVG polygon element of mountain peaks.
+   * @memberof module:RenderMountainRange
    */
   createMountainPoly(svg, coords, width, height, color = '#000000', gradient) {
     const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
@@ -111,11 +115,11 @@ export default class {
   /**
    * Add a stroke to the mountain peak ridgeline.
    *
-   * @memberOf RenderMountainRange
    * @param {array} coords -
    * @param {string} [color] -
    * @param {number} [thickness] -
    * @returns {Object}
+   * @memberof module:RenderMountainRange
    */
   createRidgeline(coords, color = '#000000', thickness = 1) {
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -138,7 +142,6 @@ export default class {
   /**
    * Return filled path with shadows of mountain peaks.
    *
-   * @memberOf RenderMountainRange
    * @param {Object} svg
    * @param {number} height
    * @param {array} coords
@@ -146,6 +149,7 @@ export default class {
    * @param {string} [color]
    * @param {Object} [gradient]
    * @returns {Object}
+   * @memberof module:RenderMountainRange
    */
   createShadowPath(svg, height, coords, valleyMinY, color = '#000000', gradient) {
     const pointCount = coords.length;

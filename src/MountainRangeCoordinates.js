@@ -1,5 +1,14 @@
 /**
+ * @module MountainRangeCoordinates
+ */
+
+/**
+ * This class provides methods for taking an array of y-axis values,
+ * subdividing them, creating flat areas, and generating an object
+ * with x and y values used to generate the final SVG mountain range.
+ *
  * @class MountainRangeCoordinates
+ * @memberof module:MountainRangeCoordinates
  */
 
 export default class {
@@ -8,19 +17,19 @@ export default class {
    * Returns x/y coordinate objects in an array with procedurally generate points.
    *
    * @function constructor
-   * @memberOf MountainRangeCoordinates
    * @param {Object} stage - The stage configuration object.
    * @param {array} [initPeaks] - The initial defined peaks, instead of random.
    * @param {Object} peaks - The peaks configuration object.
    * @param {Object} valleys - The valleys configuration object.
    * @param {array} [flats] - the flats configuration object.
    * @returns {array} x/y coordinate objects in an array with procedurally generate points
+   * @memberof module:MountainRangeCoordinates
    */
   constructor(stage, initPeaks, peaks, valleys, flats) {
     let points = 0;
 
     if (initPeaks && initPeaks.length) {
-      points = initPeaks.slice();
+      points = Array.from(initPeaks);
     } else {
       points = this.definePeaks(peaks.count, valleys.minY, peaks.minY, peaks.maxY, peaks.startWithPeak);
     }
@@ -42,10 +51,10 @@ export default class {
   /**
    * Returns a randomly generated y-axis point for a tall peak.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {number} peakMinY - The minimum y-axis limit for the new point.
    * @param {number} peakMaxY - The maximum y-axis limit for the new point.
    * @returns {number} Randomly generated y-axis point for a tall peak.
+   * @memberof module:MountainRangeCoordinates
    */
   definePeakY(peakMinY, peakMaxY) {
     return Math.floor(Math.random() * (peakMaxY - peakMinY) + peakMinY);
@@ -54,10 +63,10 @@ export default class {
   /**
    * Returns a randomly generated low valley y-axis value.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {number} peakMinY - The minimum y-axis limit for a peak point.
    * @param {number} valleyMinY - The minimum y-axis limit for a valley point.
    * @returns {number} Randomly generated low valley y-axis value.
+   * @memberof module:MountainRangeCoordinates
    */
   defineValleyY(peakMinY, valleyMinY) {
     return Math.floor(Math.random() * (peakMinY - valleyMinY) + valleyMinY);
@@ -66,13 +75,13 @@ export default class {
   /**
    * Returns an array of y-axis points.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {number} count - The count of tallest mountain peaks.
    * @param {number} valleyMinY - The lowest y-axis point.
    * @param {number} peakMinY - The lowest y-axis point for the tallest peaks.
    * @param {number} peakMaxY - The highest y-axis point for the tallest peaks.
    * @param {boolean} [startWithPeak] - True if the left most point is a peak instead of a valley.
    * @returns {array} Array of y-axis points that define the main geography of the mountain peaks.
+   * @memberof module:MountainRangeCoordinates
    */
   definePeaks(count, valleyMinY, peakMinY, peakMaxY, startWithPeak) {
     const retryLimit = 100;
@@ -111,13 +120,13 @@ export default class {
   /**
    * Return random y-axis position based on two points.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {number} point1 - First point to subdivide.
    * @param {number} point2 - Second point to subdivide.
    * @param {number} passes - The number of times to subdivide the points.
    * @param {number} minY - The minimum y-axis limit for the new point.
    * @param {number} maxY - The maximum y-axis limit for the new point.
    * @returns Randomly offset Y-axis point.
+   * @memberof module:MountainRangeCoordinates
    */
   subdivide(point1, point2, passes, minY, maxY) {
     const retryLimit = 100;
@@ -144,12 +153,12 @@ export default class {
   /**
    * Return array of random subdivided y-axis points.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {array} points - An array of y-axis points.
    * @param {number} passes - The number of times to subdivide the points.
    * @param {number} minY - The minimum y-axis limit for the new point.
    * @param {number} maxY - The maximum y-axis limit for the new point.
    * @returns {array} Array of random subdivided y-axis points.
+   * @memberof module:MountainRangeCoordinates
    */
   subdividePeaks(points, passes, minY, maxY) {
     const arr = points.splice(0);
@@ -166,10 +175,10 @@ export default class {
   /**
    * Return an array of X and Y coordinate objects.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {Object} stage - The stage configuration object.
    * @param {array} points - An array of y-axis points.
    * @returns Array of X and Y coordinate objects.
+   * @memberof module:MountainRangeCoordinates
    */
   mapPointsToObject(stage, points) {
     const pointCount = points.length;
@@ -189,7 +198,6 @@ export default class {
   /**
    * Returns a coordinates array with leveled y-axis values for a specific width at given positions.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {array} coords - The coordinates array.
    * @param {number} pos - The x-axis position to start leveling.
    * @param {number} width - The width of the area to be leveled.
@@ -197,9 +205,10 @@ export default class {
    * @param {string} name - The name of the leveled area.
    * @returns Coordinate object with a leveled y-axis value for a specific width at a given
    * position.
+   * @memberof module:MountainRangeCoordinates
    */
   levelArea(coords, pos, width, align, name) {
-    const obj = coords.slice();
+    const obj = Array.from(coords);
     const stageWidth = obj[obj.length - 1].x - obj[0].x;
 
     let index = 0;
@@ -233,13 +242,13 @@ export default class {
   /**
    * Returns the coordinates array with flattened areas.
    *
-   * @memberOf MountainRangeCoordinates
    * @param {array} coords - The coordinates array.
    * @param {array} flats - The flats configuration array.
    * @returns {array} The coordinates array with flattened areas.
+   * @memberof module:MountainRangeCoordinates
    */
   defineFlats(coords, flats) {
-    let obj = coords.slice();
+    let obj = Array.from(coords);
 
     for (let i = 0; i < flats.length; i += 1) {
       obj = this.levelArea(obj, flats[i].pos, flats[i].width, flats[i].align, flats[i].name);

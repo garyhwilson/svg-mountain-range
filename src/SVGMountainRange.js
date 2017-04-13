@@ -1,24 +1,28 @@
+/**
+ * @module SVGMountainRange
+ * @requires MergeObjects
+ * @requires MountainRangeCoordinates
+ * @requires RenderMountainRange
+ */
 import MergeObjects from './MergeObjects';
 import MountainRangeCoordinates from './MountainRangeCoordinates';
 import RenderMountainRange from './RenderMountainRange';
 
 /**
- * Blah blah blah
+ * The main class for the svg-mountain-range library.
  *
  * @class SVGMountainRange
- * @requires MergeObjects
- * @requires MountainRangeCoordinates
- * @requires RenderMountainRange
+ * @todo Figure out why JSDoc3 requires are generated twice.
+ * @memberof module:SVGMountainRange
  */
 export default class SVGMountainRange {
 
   /**
-   * Create blah blah blah
+   * The **create** method is used to generate the SVG mountain range as configured by the provided configuration object.
    *
    * @param {Object} [config={ }] - Configuration settings for every apsect of generating the SVG mountain range.
    * @returns {Object} Returns the results of the merge between the target and source objects.
-   *
-   * @memberOf SVGMountainRange
+   * @memberof module:SVGMountainRange
    */
   create(config = { }) {
     const merge = new MergeObjects();
