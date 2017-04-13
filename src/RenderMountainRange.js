@@ -3,7 +3,8 @@
  */
 
 /**
- * yadda
+ * This class renders an SVG mountain range using the required
+ * constructor parameters.
  *
  * @class RenderMountainRange
  * @memberof module:RenderMountainRange
