@@ -36,6 +36,6 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "generate-docs": "node_modules/.bin/jsdoc ./src/ --configure .jsdoc.json --verbose"
+    "generate-api-docs": "node_modules/.bin/jsdoc ./src/ --configure .jsdoc.json --verbose"
   }
 }
