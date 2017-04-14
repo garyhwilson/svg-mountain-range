@@ -16,7 +16,7 @@ var svg = Mountains.create();
 document.body.appendChild(svg);
 ```
 
-Alternatively, the you can provide a configuration object to customize the SVG graphic.
+Alternatively, you can provide a configuration object to customize the SVG graphic.
 
 ##### Configuration Example
 ```javascript
