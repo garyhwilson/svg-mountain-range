@@ -1,6 +1,6 @@
 # svg-mountain-range
 The [svg-mountain-range](http://www.github.com/garyhwilson/svg-mountain-range) library comes from an effort to produce a highly configurable and procedurally generated mountain range SVG. It's original intent was for an old-fashioned pot-shot canon game where players take turns plotting angles and power in an attempt to shoot and destroy their opponent by lobbing rounds over mountain peaks.
-
+![sample mountain range image](https://cloud.githubusercontent.com/assets/25516625/25056638/0aa45456-211f-11e7-87c8-ca0a47e11b4c.png "sample mountain range image")
 ## Installation
 Install svg-mountain-range from npm:
 

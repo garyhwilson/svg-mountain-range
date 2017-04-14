@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MountainRangeCoordinates.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="module-MergeObjects.MergeObjects.html">MergeObjects</a></li><li><a href="module-MountainRangeCoordinates.MountainRangeCoordinates.html">MountainRangeCoordinates</a></li><li><a href="module-RenderMountainRange.RenderMountainRange.html">RenderMountainRange</a></li><li><a href="module-SVGMountainRange.SVGMountainRange.html">SVGMountainRange</a></li></ul><h3>Modules</h3><ul><li><a href="module-MergeObjects.html">MergeObjects</a><ul class='methods'><li data-type='method'><a href="module-MergeObjects.html#.isObject">isObject</a></li><li data-type='method'><a href="module-MergeObjects.html#.mergeDeep">mergeDeep</a></li></ul></li><li><a href="module-MountainRangeCoordinates.html">MountainRangeCoordinates</a><ul class='methods'><li data-type='method'><a href="module-MountainRangeCoordinates.html#.constructor">constructor</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.defineFlats">defineFlats</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.definePeaks">definePeaks</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.definePeakY">definePeakY</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.defineValleyY">defineValleyY</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.levelArea">levelArea</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.mapPointsToObject">mapPointsToObject</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.subdivide">subdivide</a></li><li data-type='method'><a href="module-MountainRangeCoordinates.html#.subdividePeaks">subdividePeaks</a></li></ul></li><li><a href="module-RenderMountainRange.html">RenderMountainRange</a><ul class='methods'><li data-type='method'><a href="module-RenderMountainRange.html#.constructor">constructor</a></li><li data-type='method'><a href="module-RenderMountainRange.html#.createGradient">createGradient</a></li><li data-type='method'><a href="module-RenderMountainRange.html#.createMountainPoly">createMountainPoly</a></li><li data-type='method'><a href="module-RenderMountainRange.html#.createRidgeline">createRidgeline</a></li><li data-type='method'><a href="module-RenderMountainRange.html#.createShadowPath">createShadowPath</a></li></ul></li><li><a href="module-SVGMountainRange.html">SVGMountainRange</a><ul class='methods'><li data-type='method'><a href="module-SVGMountainRange.html#.create">create</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">MountainRangeCoordinates.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module MountainRangeCoordinates
+ */
+
+/**
+ * This class provides methods for taking an array of y-axis values,
+ * subdividing them, creating flat areas, and generating an object
+ * with x and y values used to generate the final SVG mountain range.
+ *
+ * @class MountainRangeCoordinates
+ * @memberof module:MountainRangeCoordinates
+ */
+
+export default class {
+
+ /**
+   * Returns x/y coordinate objects in an array with procedurally generate points.
+   *
+   * @function constructor
+   * @param {Object} stage - The stage configuration object.
+   * @param {array} [initPeaks] - The initial defined peaks, instead of random.
+   * @param {Object} peaks - The peaks configuration object.
+   * @param {Object} valleys - The valleys configuration object.
+   * @param {array} [flats] - the flats configuration object.
+   * @returns {array} x/y coordinate objects in an array with procedurally generate points
+   * @memberof module:MountainRangeCoordinates
+   */
+  constructor(stage, initPeaks, peaks, valleys, flats) {
+    let points = 0;
+
+    if (initPeaks &amp;&amp; initPeaks.length) {
+      points = Array.from(initPeaks);
+    } else {
+      points = this.definePeaks(peaks.count, valleys.minY, peaks.minY, peaks.maxY, peaks.startWithPeak);
+    }
+
+    points = this.subdividePeaks(points, peaks.detail, valleys.minY, peaks.maxY);
+
+    const mapping = this.mapPointsToObject(stage, points);
+    let coords = 0;
+
+    if (flats) {
+      coords = this.defineFlats(mapping, flats);
+    } else {
+      coords = mapping;
+    }
+
+    return coords;
+  }
+
+  /**
+   * Returns a randomly generated y-axis point for a tall peak.
+   *
+   * @param {number} peakMinY - The minimum y-axis limit for the new point.
+   * @param {number} peakMaxY - The maximum y-axis limit for the new point.
+   * @returns {number} Randomly generated y-axis point for a tall peak.
+   * @memberof module:MountainRangeCoordinates
+   */
+  definePeakY(peakMinY, peakMaxY) {
+    return Math.floor(Math.random() * (peakMaxY - peakMinY) + peakMinY);
+  }
+
+  /**
+   * Returns a randomly generated low valley y-axis value.
+   *
+   * @param {number} peakMinY - The minimum y-axis limit for a peak point.
+   * @param {number} valleyMinY - The minimum y-axis limit for a valley point.
+   * @returns {number} Randomly generated low valley y-axis value.
+   * @memberof module:MountainRangeCoordinates
+   */
+  defineValleyY(peakMinY, valleyMinY) {
+    return Math.floor(Math.random() * (peakMinY - valleyMinY) + valleyMinY);
+  }
+
+  /**
+   * Returns an array of y-axis points.
+   *
+   * @param {number} count - The count of tallest mountain peaks.
+   * @param {number} valleyMinY - The lowest y-axis point.
+   * @param {number} peakMinY - The lowest y-axis point for the tallest peaks.
+   * @param {number} peakMaxY - The highest y-axis point for the tallest peaks.
+   * @param {boolean} [startWithPeak] - True if the left most point is a peak instead of a valley.
+   * @returns {array} Array of y-axis points that define the main geography of the mountain peaks.
+   * @memberof module:MountainRangeCoordinates
+   */
+  definePeaks(count, valleyMinY, peakMinY, peakMaxY, startWithPeak) {
+    const retryLimit = 100;
+    const startY = startWithPeak ? peakMinY : valleyMinY;
+
+    let retry = 0;
+    let peakY = 0;
+    let valleyY = 0;
+    let points = 0;
+    let insertDelta = 1;
+
+    if (startWithPeak) {
+      points = [startY, this.defineValleyY(peakMinY, valleyMinY), startY];
+      insertDelta = 2;
+    } else {
+      points = [startY];
+    }
+
+    for (let i = 0; i &lt; count * 2; i += 2) {
+      do {
+        peakY = this.definePeakY(peakMinY, peakMaxY);
+        retry += 1;
+      } while (retry &lt; retryLimit &amp;&amp; peakY > peakMaxY);
+
+      do {
+        valleyY = this.defineValleyY(peakMinY, valleyMinY);
+      } while (valleyY &lt; valleyMinY);
+
+      points.splice(i + insertDelta, 0, peakY);
+      points.splice(i + insertDelta + 1, 0, valleyMinY);
+    }
+
+    return points;
+  }
+
+  /**
+   * Return random y-axis position based on two points.
+   *
+   * @param {number} point1 - First point to subdivide.
+   * @param {number} point2 - Second point to subdivide.
+   * @param {number} passes - The number of times to subdivide the points.
+   * @param {number} minY - The minimum y-axis limit for the new point.
+   * @param {number} maxY - The maximum y-axis limit for the new point.
+   * @returns Randomly offset Y-axis point.
+   * @memberof module:MountainRangeCoordinates
+   */
+  subdivide(point1, point2, passes, minY, maxY) {
+    const retryLimit = 100;
+    const diff = Math.abs(point1 - point2);
+    const lowPoint = point1 &lt; point2 ? point1 : point2;
+    const midpoint = Math.floor(diff / 2) + lowPoint;
+    const spread = Math.floor(midpoint / passes);
+
+    let retry = 0;
+    let delta = 0;
+
+    do {
+      delta = Math.floor(Math.random() * spread);
+      retry += 1;
+    } while (retry &lt; retryLimit &amp;&amp; (midpoint + delta > maxY || midpoint + delta &lt; minY));
+
+    if (Math.floor(Math.random() * 2) === 1) {
+      delta *= -1;
+    }
+
+    return midpoint + delta;
+  }
+
+  /**
+   * Return array of random subdivided y-axis points.
+   *
+   * @param {array} points - An array of y-axis points.
+   * @param {number} passes - The number of times to subdivide the points.
+   * @param {number} minY - The minimum y-axis limit for the new point.
+   * @param {number} maxY - The maximum y-axis limit for the new point.
+   * @returns {array} Array of random subdivided y-axis points.
+   * @memberof module:MountainRangeCoordinates
+   */
+  subdividePeaks(points, passes, minY, maxY) {
+    const arr = points.splice(0);
+
+    for (let pass = 0; pass &lt; passes; pass += 1) {
+      for (let i = 0; i &lt; arr.length - 1; i += 2) {
+        arr.splice(i + 1, 0, this.subdivide(arr[i], arr[i + 1], passes, minY, maxY));
+      }
+    }
+
+    return arr;
+  }
+
+  /**
+   * Return an array of X and Y coordinate objects.
+   *
+   * @param {Object} stage - The stage configuration object.
+   * @param {array} points - An array of y-axis points.
+   * @returns Array of X and Y coordinate objects.
+   * @memberof module:MountainRangeCoordinates
+   */
+  mapPointsToObject(stage, points) {
+    const pointCount = points.length;
+    const xInc = stage.width / (pointCount - 1);
+    const coords = [];
+
+    for (let point = 0; point &lt; pointCount; point += 1) {
+      coords.push({
+        x: xInc * point,
+        y: stage.height - points[point]
+      });
+    }
+
+    return coords;
+  }
+
+  /**
+   * Returns a coordinates array with leveled y-axis values for a specific width at given positions.
+   *
+   * @param {array} coords - The coordinates array.
+   * @param {number} pos - The x-axis position to start leveling.
+   * @param {number} width - The width of the area to be leveled.
+   * @param {string} align - The alignment of either left or right.
+   * @param {string} name - The name of the leveled area.
+   * @returns Coordinate object with a leveled y-axis value for a specific width at a given
+   * position.
+   * @memberof module:MountainRangeCoordinates
+   */
+  levelArea(coords, pos, width, align, name) {
+    const obj = Array.from(coords);
+    const stageWidth = obj[obj.length - 1].x - obj[0].x;
+
+    let index = 0;
+    let desiredX = Math.floor(stageWidth * pos);
+
+    switch (align) {
+      case 'right':
+        desiredX -= width;
+        break;
+
+      case 'center':
+        desiredX -= Math.floor(width / 2);
+        break;
+
+      default:
+        break;
+    }
+
+    for (let i = 0; i &lt; obj.length; i += 1) {
+      if (!index &amp;&amp; obj[i].x > desiredX) {
+        index = i;
+        obj[i].flatName = name;
+      } else if (index &amp;&amp; obj[i].x - obj[index].x &lt;= width) {
+        obj[i].y = obj[index].y;
+      }
+    }
+
+    return obj;
+  }
+
+  /**
+   * Returns the coordinates array with flattened areas.
+   *
+   * @param {array} coords - The coordinates array.
+   * @param {array} flats - The flats configuration array.
+   * @returns {array} The coordinates array with flattened areas.
+   * @memberof module:MountainRangeCoordinates
+   */
+  defineFlats(coords, flats) {
+    let obj = Array.from(coords);
+
+    for (let i = 0; i &lt; flats.length; i += 1) {
+      obj = this.levelArea(obj, flats[i].pos, flats[i].width, flats[i].align, flats[i].name);
+    }
+
+    return obj;
+  }
+
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Apr 13 2017 15:34:58 GMT-0500 (CDT) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
