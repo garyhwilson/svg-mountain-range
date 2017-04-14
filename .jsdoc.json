@@ -16,7 +16,7 @@
     "useLongnameInNav": false
   },
   "opts": {
-    "destination": "./docs/",
+    "destination": "./api-docs/",
     "encoding": "utf8",
     "private": true,
     "recurse": true,

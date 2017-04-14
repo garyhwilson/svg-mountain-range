@@ -1,0 +1,10 @@
+.gitignore
+.npmignore
+.vscode
+gulpfile.js
+LICENSE
+node_modules
+npm-debug.log
+package.json
+src
+yarn.lock
