@@ -1,2 +1,4 @@
-docs
+.vscode
+api-docs
 node_modules
+npm-debug.log
