@@ -34,10 +34,6 @@ var config = {
     minY: 50
   },
 };
-
-var Mountains = new SVGMountainRange();
-var svg = Mountains.create(config);
-document.body.appendChild(svg);
 ```
 
 ## Configuration
@@ -46,9 +42,12 @@ The `create()` method accepts a JSON configuration object to customize every asp
 ```javascript
 var svg = Mountains.create(config);
 ```
-### config.stage
+
+### stage
+Type: `Object`
+
 The `stage` object defines the size of the SVG rendering.
-### config.stage.height
+### stage.height
 Type: `Number` Default value: `300`
 
 A number value that defines the height of the SVG.
@@ -56,7 +55,7 @@ A number value that defines the height of the SVG.
 ```javascript
 height: 300
 ```
-### config.stage.width
+### stage.width
 Type: `Number` Default value: `600`
 
 A number value that defines the width of the SVG.
@@ -64,9 +63,11 @@ A number value that defines the width of the SVG.
 ```javascript
 width: 600
 ```
-### config.peaks
+### peaks
+Type: `Object`
+
 The `peaks` object defines the high and low points of the mountain range as well as the level of detail.
-### config.peaks.count
+### peaks.count
 Type: `Number` Default value: `1`
 
 A number value that defines the number of mountain peaks.
@@ -74,7 +75,7 @@ A number value that defines the number of mountain peaks.
 ```javascript
 width: 1
 ```
-### config.peaks.detail
+### peaks.detail
 Type: `Number` Default value: `4`
 
 A number value that defines the amount of detail. A value of 1 would be minimal detail while higher numbers add more subdivisions.
@@ -82,7 +83,7 @@ A number value that defines the amount of detail. A value of 1 would be minimal 
 ```javascript
 detail: 4
 ```
-### config.peaks.maxY
+### peaks.maxY
 Type: `Number` Default value: `300`
 
 A number value that defines the highest y-value a peak can have.
@@ -90,7 +91,7 @@ A number value that defines the highest y-value a peak can have.
 ```javascript
 maxY: 300
 ```
-### config.peaks.minY
+### peaks.minY
 Type: `Number` Default value: `200`
 
 A number value that defines the lowest y-value a peak can have.
@@ -98,9 +99,11 @@ A number value that defines the lowest y-value a peak can have.
 ```javascript
 maxY: 200
 ```
-### config.valleys
+### valleys
+Type: `Object`
+
 The `valleys` object defines the lower limit of the valleys in the mountain range SVG.
-### config.valleys.minY
+### valleys.minY
 Type: `Number` Default value: `50`
 
 A number value that defines the lowest y-value a value can have.
@@ -108,20 +111,20 @@ A number value that defines the lowest y-value a value can have.
 ```javascript
 maxY: 50
 ```
-### config.flats[]
+### flats
 Type: `Array`
 
 An array of objects in which each object defines a flattened portion of the SVG.
 
-### config.flats[].align
+### flats.align
 Type: `String` Default value: `left`
 
-A string value that sets the alignment as either `'left'`, `'center'`, or `'right'` of the `config.flats.pos` value.
+A string value that sets the alignment as either `'left'`, `'center'`, or `'right'` of the `flats.pos` value.
 
 ```javascript
 name: 'right'
 ```
-### config.flats[].name
+### flats.name
 Type: `String`
 
 A string value that will be an identifier for a flattened section of the SVG.
@@ -129,7 +132,7 @@ A string value that will be an identifier for a flattened section of the SVG.
 ```javascript
 name: 'platform1'
 ```
-### config.flats[].pos
+### flats.pos
 Type: `Number`
 
 A number value from 0 to 1 that represents the position of the platform from the left edge of the SVG.
@@ -137,7 +140,7 @@ A number value from 0 to 1 that represents the position of the platform from the
 ```javascript
 pos: 0.25
 ```
-### config.flats[].width
+### flats.width
 Type: `Number`
 
 A string value for the width, in pixels, of the defined platform.
@@ -145,9 +148,11 @@ A string value for the width, in pixels, of the defined platform.
 ```javascript
 width: 70
 ```
-### config.fill
+### fill
+Type: `Object`
+
 The `fill` object defines how the SVG is filled; be it a solid color or a gradient.
-### config.fill.color
+### fill.color
 Type: `String`
 
 A string value formatted as a hex-based RGB color that will be the main fill color for the SVG.
@@ -155,13 +160,15 @@ A string value formatted as a hex-based RGB color that will be the main fill col
 ```javascript
 color: '#c0c0c0'
 ```
-### config.fill.gradient
+### fill.gradient
+Type: `Object`
+
 The `fill.gradient` object defines the gradient used to fill the SVG mountain range.
-### config.fill.gradient.stops[]
+### fill.gradient.stops
 Type: `Array`
 
 An array of objects that define gradient stops for the fill.
-### config.fill.gradient.stops[].offset
+### fill.gradient.stops.offset
 Type: `String`
 
 A string value that's a percentage used to define the gradient offset.
@@ -169,7 +176,7 @@ A string value that's a percentage used to define the gradient offset.
 ```javascript
 offset: '10%'
 ```
-### config.fill.gradient.stops[].stop-color
+### fill.gradient.stops.stop-color
 Type: `String`
 
 A string value formatted as a hex-based RGB color that will be the gradient stop-color for the SVG at a point defined by the offset.
@@ -177,9 +184,43 @@ A string value formatted as a hex-based RGB color that will be the gradient stop
 ```javascript
 'stop-color': '#fa902b'
 ```
-### config.shadow
+### fill.gradient.x1
+Type: `String`
+
+A string value that's a percentage used to set the first fill x-value.
+
+```javascript
+x1: '0%'
+```
+### fill.gradient.y1
+Type: `String`
+
+A string value that's a percentage used to set the first fill y-value.
+
+```javascript
+y1: '0%'
+```
+### fill.gradient.x2
+Type: `String`
+
+A string value that's a percentage used to set the last fill x-value.
+
+```javascript
+x2: '0%'
+```
+### fill.gradient.y2
+Type: `String`
+
+A string value that's a percentage used to set the last fill y-value.
+
+```javascript
+y2: '0%'
+```
+### shadow
+Type: `Object`
+
 The `shadow` object defines how the SVG shadows are filled; be it a solid color or a gradient.
-### config.shadow.color
+### shadow.color
 Type: `String`
 
 A string value formatted as a hex-based RGB color that will be the main fill color for the shadows in the SVG.
@@ -187,13 +228,15 @@ A string value formatted as a hex-based RGB color that will be the main fill col
 ```javascript
 color: '#c0c0c0'
 ```
-### config.shadow.gradient
+### shadow.gradient
+Type: `Object`
+
 The `shadow.gradient` object defines the gradient used to fill the shadows in the SVG mountain range.
-### config.shadow.gradient.stops[]
+### shadow.gradient.stops
 Type: `Array`
 
 An array of objects that define gradient stops for the shadows.
-### config.shadow.gradient.stops[].offset
+### shadow.gradient.stops.offset
 Type: `String`
 
 A string value that's a percentage used to define the gradient offset.
@@ -201,7 +244,7 @@ A string value that's a percentage used to define the gradient offset.
 ```javascript
 offset: '10%'
 ```
-### config.shadow.gradient.stops[].stop-color
+### shadow.gradient.stops.stop-color
 Type: `String`
 
 A string value formatted as a hex-based RGB color that will be the gradient stop-color for the SVG at a point defined by the offset.
@@ -209,13 +252,55 @@ A string value formatted as a hex-based RGB color that will be the gradient stop
 ```javascript
 'stop-color': '#fa902b'
 ```
-### config.ridge
+### shadow.gradient.x1
+Type: `String`
+
+A string value that's a percentage used to set the first shadow x-value.
+
+```javascript
+x1: '0%'
+```
+### shadow.gradient.y1
+Type: `String`
+
+A string value that's a percentage used to set the first shadow y-value.
+
+```javascript
+y1: '0%'
+```
+### shadow.gradient.x2
+Type: `String`
+
+A string value that's a percentage used to set the last shadow x-value.
+
+```javascript
+x2: '0%'
+```
+### shadow.gradient.y2
+Type: `String`
+
+A string value that's a percentage used to set the last shadow y-value.
+
+```javascript
+y2: '0%'
+```
+### ridge
+Type: `Object`
+
 This `ridge` object defines a stroke for the top contour of the mountain range SVG.
-### config.ridge.color
+### ridge.color
 Type: `String`
 
 A string value formatted as a hex-based RGB color that will be the the stroke color.
-### config.ridge.thickness
+
+```javascript
+color: '#000000'
+```
+### ridge.thickness
 Type: `Number`
 
 A number value that sets the stroke size in pixels.
+
+```javascript
+thickness: 5
+```
